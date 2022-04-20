@@ -20,10 +20,10 @@ public class MainActivity extends AppCompatActivity {
         btnLogout = findViewById(R.id.btn_logout);
 
         btnTambah.setOnClickListener(v ->{
-
+            startActivity(new Intent(getApplicationContext(), TambahDataActivity.class));
         });
         btnPenerima.setOnClickListener(v ->{
-
+            startActivity(new Intent(getApplicationContext(), ListDataActivity.class));
         });
         btnLogout.setOnClickListener(v ->{
             FirebaseAuth.getInstance().signOut();

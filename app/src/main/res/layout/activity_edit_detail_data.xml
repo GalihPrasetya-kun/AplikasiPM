@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditDetailDataActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+        <EditText
+            android:id="@+id/etNoinduk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="No induk"/>
+
+        <EditText
+            android:id="@+id/etNoktp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="No Ktp"/>
+
+        <EditText
+            android:id="@+id/etNama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nama"/>
+
+        <EditText
+            android:id="@+id/etTglLahir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tempat tanggal lahir"/>
+
+        <EditText
+            android:id="@+id/etJKelamin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Jenis Kelamin"/>
+
+        <EditText
+            android:id="@+id/etStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Status Perkawinan"/>
+
+        <EditText
+            android:id="@+id/etPendidikan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pendidikan"/>
+
+        <EditText
+            android:id="@+id/etAgama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Agama"/>
+
+        <EditText
+            android:id="@+id/etAlamat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Alamat"/>
+
+        <EditText
+            android:id="@+id/etAsrama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Asrama"/>
+
+        <EditText
+            android:id="@+id/etNoHub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="No yang dapat dihubungi"/>
+
+        <EditText
+            android:id="@+id/etPJawab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Penanggung Jawab"/>
+
+
+        <EditText
+            android:id="@+id/etTglMasuk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tanggal Masuk"/>
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btn_back"
+            android:text="Simpan" />
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kembali"
+            android:layout_alignParentBottom="true"/>
+
+    </LinearLayout>
+
+</ScrollView>
