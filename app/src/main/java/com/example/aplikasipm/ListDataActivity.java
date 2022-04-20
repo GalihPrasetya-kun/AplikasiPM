@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import com.example.aplikasipm.Model.DataListAdapter;
 import com.example.aplikasipm.Model.DataListModel;
@@ -22,6 +24,7 @@ public class ListDataActivity extends AppCompatActivity {
     DatabaseReference mRef;
     DataListAdapter adapter;
     ArrayList<DataListModel> list;
+    Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,11 @@ public class ListDataActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+        });
+
+        btnBack = findViewById(R.id.btn_back);
+        btnBack.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
         });
     }
 }
