@@ -25,23 +25,18 @@
                 android:layout_marginRight="10dp"
                 android:drawableEnd="@drawable/back"/>
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
             <Button
                 android:id="@+id/btn_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="10dp"
                 android:text="Hapus Data"/>
 
             <Button
-                android:id="@+id/btn_save"
+                android:id="@+id/btn_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
                 android:text="Edit Data"/>
 
         </LinearLayout>
