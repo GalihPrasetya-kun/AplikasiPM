@@ -1,63 +1,46 @@
 package com.example.aplikasipm;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.view.View;
 
-import com.example.aplikasipm.Model.DataListAdapter;
+import com.example.aplikasipm.Model.DataFirebaseHelper;
 import com.example.aplikasipm.Model.DataListModel;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.example.aplikasipm.Model.DataRecyclerAdapter;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ListDataActivity extends AppCompatActivity {
-    RecyclerView recyclerView;
-    DatabaseReference mRef;
-    DataListAdapter adapter;
-    ArrayList<DataListModel> list;
-    Button btnBack;
+    RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_data);
-        recyclerView = findViewById(R.id.recyclerView);
-        mRef = FirebaseDatabase.getInstance().getReference("Penerima");
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        list = new ArrayList<>();
-        adapter = new DataListAdapter(this,list);
-        recyclerView.setAdapter(adapter);
-
-        mRef.addValueEventListener(new ValueEventListener() {
+        mRecyclerView = findViewById(R.id.recyclerView);
+        new DataFirebaseHelper().readData(new DataFirebaseHelper.DataStatus() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    DataListModel data = dataSnapshot.getValue(DataListModel.class);
-                    list.add(data);
-                }
-                adapter.notifyDataSetChanged();
+            public void DataIsLoaded(List<DataListModel> list, List<String> keys) {
+                findViewById(R.id.progressBar).setVisibility(View.GONE);
+                new DataRecyclerAdapter().setConfig(mRecyclerView, ListDataActivity.this, list, keys);
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void DataIsInserted() {
 
             }
-        });
 
-        btnBack = findViewById(R.id.btn_back);
-        btnBack.setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            @Override
+            public void DataIsUpdated() {
+
+            }
+
+            @Override
+            public void DataIsDeleted() {
+
+            }
         });
     }
 }

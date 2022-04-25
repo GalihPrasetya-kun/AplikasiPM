@@ -18,7 +18,7 @@
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:drawableEnd="@drawable/back"/>
+            android:drawableEnd="@drawable/back" />
 
         <Button
             android:layout_width="match_parent"
@@ -31,8 +31,21 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/LL"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp"
-        android:layout_below="@id/LL"/>
+        tools:layout_editor_absoluteY="1dp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="350dp"
+        android:layout_marginEnd="150dp"
+        android:layout_marginBottom="320dp" />
 
 </RelativeLayout>
