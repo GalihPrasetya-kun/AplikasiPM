@@ -9,18 +9,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.aplikasipm.Model.DataFirebaseHelper;
+import com.example.aplikasipm.Model.DataListModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TambahDataActivity extends AppCompatActivity {
     EditText etNoinduk, etNoktp, etNama, etTgllahir, etJkelamin, etStatus, etPendidikan, etAgama, etAlamat, etAsrama, etNohub, etPjawab, etTglmasuk;
     Button btnSave, btnBack;
-    DatabaseReference mRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,47 +42,49 @@ public class TambahDataActivity extends AppCompatActivity {
         etPjawab = findViewById(R.id.etPJawab);
         etTglmasuk = findViewById(R.id.etTglMasuk);
 
-        mRef = FirebaseDatabase.getInstance().getReference();
-
         btnBack = findViewById(R.id.btn_back);
         btnBack.setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+            return;
         });
 
         btnSave = findViewById(R.id.btn_save);
         btnSave.setOnClickListener(v -> {
-            createData();
-        });
-    }
+            DataListModel listData = new DataListModel();
+            listData.setNoinduk(etNoinduk.getText().toString());
+            listData.setNoktp(etNoktp.getText().toString());
+            listData.setNama(etNama.getText().toString());
+            listData.setTgllahir(etTgllahir.getText().toString());
+            listData.setJkelamin(etJkelamin.getText().toString());
+            listData.setStatus(etStatus.getText().toString());
+            listData.setPendidikan(etPendidikan.getText().toString());
+            listData.setAgama(etAgama.getText().toString());
+            listData.setAlamat(etAlamat.getText().toString());
+            listData.setAsrama(etAsrama.getText().toString());
+            listData.setNohub(etNohub.getText().toString());
+            listData.setPjawab(etPjawab.getText().toString());
+            listData.setTglmasuk(etTglmasuk.getText().toString());
+            new DataFirebaseHelper().addData(listData, new DataFirebaseHelper.DataStatus() {
+                @Override
+                public void DataIsLoaded(List<DataListModel> list, List<String> keys) {
 
-    private void createData() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("no induk", etNoinduk.getText().toString());
-        map.put("no ktp", etNoktp.getText().toString());
-        map.put("nama", etNama.getText().toString());
-        map.put("tempat tanggal lahir", etTgllahir.getText().toString());
-        map.put("jenis kelamin", etJkelamin.getText().toString());
-        map.put("status", etStatus.getText().toString());
-        map.put("pendidikan", etPendidikan.getText().toString());
-        map.put("agama", etAgama.getText().toString());
-        map.put("alamat", etAlamat.getText().toString());
-        map.put("asrama", etAsrama.getText().toString());
-        map.put("no hub", etNohub.getText().toString());
-        map.put("penanggung jawab", etPjawab.getText().toString());
-        map.put("tanggal masuk", etTglmasuk.getText().toString());
+                }
 
-        FirebaseDatabase.getInstance().getReference().child("Penerima").push()
-                .setValue(map)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(TambahDataActivity.this, "Data berhasil tersimpan", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(TambahDataActivity.this, "Data gagal tersimpan", Toast.LENGTH_SHORT).show();
-            }
+                @Override
+                public void DataIsInserted() {
+                    Toast.makeText(TambahDataActivity.this, "Data Berhasil Disimpan", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void DataIsUpdated() {
+
+                }
+
+                @Override
+                public void DataIsDeleted() {
+
+                }
+            });
         });
     }
 }

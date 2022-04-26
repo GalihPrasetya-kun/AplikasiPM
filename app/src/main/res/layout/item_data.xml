@@ -34,11 +34,61 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/txtKtp"
+            android:id="@+id/txtNoktp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="KTP"
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/txtTglLahir"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
+        <TextView
+            android:id="@+id/txtJKelamin"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
+        <TextView
+            android:id="@+id/txtStatus"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
+        <TextView
+            android:id="@+id/txtPendidikan"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
+        <TextView
+            android:id="@+id/txtAgama"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
+        <TextView
+            android:id="@+id/txtAlamat"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
+        <TextView
+            android:id="@+id/txtAsrama"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
+        <TextView
+            android:id="@+id/txtNoHub"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
+        <TextView
+            android:id="@+id/txtPJawab"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
+        <TextView
+            android:id="@+id/txtTglMasuk"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
 
     </LinearLayout>
 

@@ -54,8 +54,26 @@ public class DataFirebaseHelper {
         String key = mRef.push().getKey();
         mRef.child(key).setValue(list).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onSuccess(Void unused) {
+            public void onSuccess(Void aVoid) {
                 dataStatus.DataIsInserted();
+            }
+        });
+    }
+
+    public void updateData(String key, DataListModel list, final DataStatus dataStatus){
+        mRef.child(key).setValue(list).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                dataStatus.DataIsUpdated();
+            }
+        });
+    }
+
+    public void deleteData(String key, final DataStatus dataStatus) {
+        mRef.child(key).setValue(null).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                dataStatus.DataIsDeleted();
             }
         });
     }
