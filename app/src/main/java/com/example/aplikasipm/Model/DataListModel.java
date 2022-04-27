@@ -1,13 +1,13 @@
 package com.example.aplikasipm.Model;
 
 public class DataListModel {
-    String noinduk, noktp, nama, tgllahir, jkelamin, status, pendidikan, agama, alamat, asrama, nohub, pjawab, tglmasuk;
+    String noinduk, noktp, nama, tgllahir, jkelamin, status, pendidikan, agama, alamat, asrama, nohub, pjawab, tglmasuk, catatanpm;
 
     public DataListModel(){
 
     }
 
-    public DataListModel(String noinduk, String noktp, String nama, String tgllahir, String jkelamin, String status, String pendidikan, String agama, String alamat, String asrama, String nohub, String pjawab, String tglmasuk) {
+    public DataListModel(String noinduk, String noktp, String nama, String tgllahir, String jkelamin, String status, String pendidikan, String agama, String alamat, String asrama, String nohub, String pjawab, String tglmasuk, String catatanpm) {
         this.noinduk = noinduk;
         this.noktp = noktp;
         this.nama = nama;
@@ -21,6 +21,7 @@ public class DataListModel {
         this.nohub = nohub;
         this.pjawab = pjawab;
         this.tglmasuk = tglmasuk;
+        this.catatanpm = catatanpm;
     }
 
     public String getNoinduk() {
@@ -125,5 +126,13 @@ public class DataListModel {
 
     public void setTglmasuk(String tglmasuk) {
         this.tglmasuk = tglmasuk;
+    }
+
+    public String getCatatanpm() {
+        return catatanpm;
+    }
+
+    public void setCatatanpm(String catatanpm) {
+        this.catatanpm = catatanpm;
     }
 }

@@ -16,10 +16,10 @@ import com.example.aplikasipm.Model.DataListModel;
 import java.util.List;
 
 public class DetailDataActivity extends AppCompatActivity {
-    TextView txtNoinduk, txtNoktp, txtNama, txtTgllahir, txtJkelamin, txtStatus, txtPendidikan, txtAgama, txtAlamat, txtAsrama, txtNohub, txtPjawab, txtTglmasuk;
-    Button btnBack, btnDelete, btnEdit, btnCreate;
+    TextView txtNoinduk, txtNoktp, txtNama, txtTgllahir, txtJkelamin, txtStatus, txtPendidikan, txtAgama, txtAlamat, txtAsrama, txtNohub, txtPjawab, txtTglmasuk, txtCatatanPM;
+    Button btnBack, btnDelete, btnEdit, btnEditCatatan;
 
-    String key, noinduk, noktp, nama, tgllahir, jkelamin, status, pendidikan, agama, alamat, asrama, nohub, pjawab, tglmasuk;
+    String key, noinduk, noktp, nama, tgllahir, jkelamin, status, pendidikan, agama, alamat, asrama, nohub, pjawab, tglmasuk, catatanpm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,7 @@ public class DetailDataActivity extends AppCompatActivity {
         nohub = getIntent().getStringExtra("nohub");
         pjawab = getIntent().getStringExtra("pjawab");
         tglmasuk = getIntent().getStringExtra("tglmasuk");
+        catatanpm = getIntent().getStringExtra("catatanpm");
 
         txtNoinduk = findViewById(R.id.txtNoinduk);
         txtNoinduk.setText(noinduk);
@@ -66,6 +67,8 @@ public class DetailDataActivity extends AppCompatActivity {
         txtPjawab.setText(pjawab);
         txtTglmasuk = findViewById(R.id.txtTglMasuk);
         txtTglmasuk.setText(tglmasuk);
+        txtCatatanPM = findViewById(R.id.txtCatatanPM);
+        txtCatatanPM.setText(catatanpm);
 
         btnBack = findViewById(R.id.btn_back);
         btnBack.setOnClickListener(v -> {
@@ -120,12 +123,29 @@ public class DetailDataActivity extends AppCompatActivity {
             intent.putExtra("nohub", txtNohub.getText().toString());
             intent.putExtra("pjawab", txtPjawab.getText().toString());
             intent.putExtra("tglmasuk", txtTglmasuk.getText().toString());
+            intent.putExtra("catatanpm", txtCatatanPM.getText().toString());
             startActivity(intent);
         });
 
-        btnCreate = findViewById(R.id.btn_create);
-        btnCreate.setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(), TambahCatatanDataActivity.class));
+        btnEditCatatan = findViewById(R.id.btn_edit_catatan);
+        btnEditCatatan.setOnClickListener(v -> {
+            Intent intent = new Intent(DetailDataActivity.this, EditCatatanActivity.class);
+            intent.putExtra("key", key);
+            intent.putExtra("noinduk", txtNoinduk.getText().toString());
+            intent.putExtra("noktp", txtNoktp.getText().toString());
+            intent.putExtra("nama", txtNama.getText().toString());
+            intent.putExtra("tgllahir", txtTgllahir.getText().toString());
+            intent.putExtra("jkelamin", txtJkelamin.getText().toString());
+            intent.putExtra("status", txtStatus.getText().toString());
+            intent.putExtra("pendidikan", txtPendidikan.getText().toString());
+            intent.putExtra("agama", txtAgama.getText().toString());
+            intent.putExtra("alamat", txtAlamat.getText().toString());
+            intent.putExtra("asrama", txtAsrama.getText().toString());
+            intent.putExtra("nohub", txtNohub.getText().toString());
+            intent.putExtra("pjawab", txtPjawab.getText().toString());
+            intent.putExtra("tglmasuk", txtTglmasuk.getText().toString());
+            intent.putExtra("catatanpm", txtCatatanPM.getText().toString());
+            startActivity(intent);
         });
     }
 }

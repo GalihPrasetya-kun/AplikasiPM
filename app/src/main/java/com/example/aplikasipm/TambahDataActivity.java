@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 public class TambahDataActivity extends AppCompatActivity {
-    EditText etNoinduk, etNoktp, etNama, etTgllahir, etJkelamin, etStatus, etPendidikan, etAgama, etAlamat, etAsrama, etNohub, etPjawab, etTglmasuk;
+    EditText etNoinduk, etNoktp, etNama, etTgllahir, etJkelamin, etStatus, etPendidikan, etAgama, etAlamat, etAsrama, etNohub, etPjawab, etTglmasuk, etCatatanPM;
     Button btnSave, btnBack;
 
     @Override
@@ -41,6 +41,7 @@ public class TambahDataActivity extends AppCompatActivity {
         etNohub = findViewById(R.id.etNoHub);
         etPjawab = findViewById(R.id.etPJawab);
         etTglmasuk = findViewById(R.id.etTglMasuk);
+        etCatatanPM = findViewById(R.id.etCatatanPM);
 
         btnBack = findViewById(R.id.btn_back);
         btnBack.setOnClickListener(v -> {
@@ -64,6 +65,7 @@ public class TambahDataActivity extends AppCompatActivity {
             listData.setNohub(etNohub.getText().toString());
             listData.setPjawab(etPjawab.getText().toString());
             listData.setTglmasuk(etTglmasuk.getText().toString());
+            listData.setCatatanpm(etCatatanPM.getText().toString());
             new DataFirebaseHelper().addData(listData, new DataFirebaseHelper.DataStatus() {
                 @Override
                 public void DataIsLoaded(List<DataListModel> list, List<String> keys) {

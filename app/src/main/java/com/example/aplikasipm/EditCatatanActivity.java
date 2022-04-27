@@ -14,7 +14,7 @@ import com.example.aplikasipm.Model.DataListModel;
 
 import java.util.List;
 
-public class EditDetailDataActivity extends AppCompatActivity {
+public class EditCatatanActivity extends AppCompatActivity {
     EditText etNoinduk, etNoktp, etNama, etTgllahir, etJkelamin, etStatus, etPendidikan, etAgama, etAlamat, etAsrama, etNohub, etPjawab, etTglmasuk, etCatatanPM;
     Button btnSave, btnBack;
 
@@ -23,7 +23,7 @@ public class EditDetailDataActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_detail_data);
+        setContentView(R.layout.activity_edit_catatan);
         key = getIntent().getStringExtra("key");
         noinduk = getIntent().getStringExtra("noinduk");
         noktp = getIntent().getStringExtra("noktp");
@@ -106,7 +106,7 @@ public class EditDetailDataActivity extends AppCompatActivity {
 
                     @Override
                     public void DataIsUpdated() {
-                        Toast.makeText(EditDetailDataActivity.this, "Data Berhasil Diupdate", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditCatatanActivity.this, "Catatan Berhasil Diupdate", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

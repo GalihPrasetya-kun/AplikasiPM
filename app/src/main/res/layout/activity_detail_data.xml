@@ -235,24 +235,28 @@
             </LinearLayout>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_create"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tambah Catatan"/>
+            android:layout_marginTop="10dp"
+            android:text="Catatan PM"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:gravity="center"/>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/txtCatatanPM"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:layout_height="wrap_content"
+            android:text="Catatan"
+            android:textSize="20dp"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:layout_editor_absoluteX="1dp"
-                tools:layout_editor_absoluteY="1dp" />
+        <Button
+            android:id="@+id/btn_edit_catatan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Edit Catatan PM"
+            android:layout_marginBottom="10dp"/>
 
-        </LinearLayout>
     </LinearLayout>
 </ScrollView>

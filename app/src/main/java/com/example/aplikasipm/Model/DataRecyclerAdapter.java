@@ -28,7 +28,7 @@ public class DataRecyclerAdapter {
     }
 
     class DataListView extends RecyclerView.ViewHolder{
-        TextView txtNoinduk, txtNoktp, txtNama, txtTgllahir, txtJkelamin, txtStatus, txtPendidikan, txtAgama, txtAlamat, txtAsrama, txtNohub, txtPjawab, txtTglmasuk;
+        TextView txtNoinduk, txtNoktp, txtNama, txtTgllahir, txtJkelamin, txtStatus, txtPendidikan, txtAgama, txtAlamat, txtAsrama, txtNohub, txtPjawab, txtTglmasuk, txtCatatanPM;
         String key;
 
         public DataListView(ViewGroup parent){
@@ -46,6 +46,7 @@ public class DataRecyclerAdapter {
             txtNohub = (TextView) itemView.findViewById(R.id.txtNoHub);
             txtPjawab = (TextView) itemView.findViewById(R.id.txtPJawab);
             txtTglmasuk = (TextView) itemView.findViewById(R.id.txtTglMasuk);
+            txtCatatanPM = (TextView) itemView.findViewById(R.id.txtCatatanPM);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -65,6 +66,7 @@ public class DataRecyclerAdapter {
                     intent.putExtra("nohub", txtNohub.getText().toString());
                     intent.putExtra("pjawab", txtPjawab.getText().toString());
                     intent.putExtra("tglmasuk", txtTglmasuk.getText().toString());
+                    intent.putExtra("catatanpm", txtCatatanPM.getText().toString());
 
                     mContext.startActivity(intent);
                 }
@@ -85,6 +87,7 @@ public class DataRecyclerAdapter {
             txtNohub.setText(listData.getNohub());
             txtPjawab.setText(listData.getPjawab());
             txtTglmasuk.setText(listData.getTglmasuk());
+            txtCatatanPM.setText(listData.getCatatanpm());
             this.key = key;
         }
     }

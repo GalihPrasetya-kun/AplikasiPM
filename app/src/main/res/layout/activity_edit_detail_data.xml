@@ -186,8 +186,12 @@
             android:id="@+id/etTglMasuk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="date"
             android:hint="Tanggal Masuk" />
+
+        <EditText
+            android:id="@+id/etCatatanPM"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
 
         <Button
             android:id="@+id/btn_save"
@@ -201,7 +205,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Kembali"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"/>
 
     </LinearLayout>
 
