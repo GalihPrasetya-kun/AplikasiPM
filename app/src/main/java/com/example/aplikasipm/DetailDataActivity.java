@@ -3,29 +3,37 @@ package com.example.aplikasipm;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.aplikasipm.Model.DataFirebaseHelper;
 import com.example.aplikasipm.Model.DataListModel;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 public class DetailDataActivity extends AppCompatActivity {
-    TextView txtNoinduk, txtNoktp, txtNama, txtTgllahir, txtJkelamin, txtStatus, txtPendidikan, txtAgama, txtAlamat, txtAsrama, txtNohub, txtPjawab, txtTglmasuk, txtCatatanPM;
+    TextView txtNoinduk, txtNoktp, txtNama, txtTgllahir, txtJkelamin, txtStatus, txtPendidikan, txtAgama, txtAlamat, txtAsrama, txtNohub, txtPjawab, txtTglmasuk, txtCatatanPM, txtUrlProfile;
     Button btnBack, btnDelete, btnEdit, btnEditCatatan;
+    Button btnLihatProfile;
+    ImageView imgProfile;
 
-    String key, noinduk, noktp, nama, tgllahir, jkelamin, status, pendidikan, agama, alamat, asrama, nohub, pjawab, tglmasuk, catatanpm;
+    String key, noinduk, noktp, nama, tgllahir, jkelamin, status, pendidikan, agama, alamat, asrama, nohub, pjawab, tglmasuk, catatanpm, urlprofile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_data);
         key = getIntent().getStringExtra("key");
+        urlprofile = getIntent().getStringExtra("urlprofile");
         noinduk = getIntent().getStringExtra("noinduk");
         noktp = getIntent().getStringExtra("noktp");
         nama = getIntent().getStringExtra("nama");
@@ -41,6 +49,8 @@ public class DetailDataActivity extends AppCompatActivity {
         tglmasuk = getIntent().getStringExtra("tglmasuk");
         catatanpm = getIntent().getStringExtra("catatanpm");
 
+        txtUrlProfile = findViewById(R.id.txtUrlProfile);
+        txtUrlProfile.setText(urlprofile);
         txtNoinduk = findViewById(R.id.txtNoinduk);
         txtNoinduk.setText(noinduk);
         txtNoktp = findViewById(R.id.txtNoktp);
@@ -70,10 +80,19 @@ public class DetailDataActivity extends AppCompatActivity {
         txtCatatanPM = findViewById(R.id.txtCatatanPM);
         txtCatatanPM.setText(catatanpm);
 
+        imgProfile = findViewById(R.id.imgProfile);
+
         btnBack = findViewById(R.id.btn_back);
         btnBack.setOnClickListener(v -> {
             finish();
             return;
+        });
+
+        btnLihatProfile = findViewById(R.id.btn_lihat_profile);
+        btnLihatProfile.setOnClickListener(v -> {
+            byte[] bytes = Base64.decode(urlprofile, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            imgProfile.setImageBitmap(bitmap);
         });
 
         btnDelete = findViewById(R.id.btn_delete);
@@ -110,6 +129,7 @@ public class DetailDataActivity extends AppCompatActivity {
         btnEdit.setOnClickListener(v -> {
             Intent intent = new Intent(DetailDataActivity.this, EditDetailDataActivity.class);
             intent.putExtra("key", key);
+            intent.putExtra("urlprofile", txtUrlProfile.getText().toString());
             intent.putExtra("noinduk", txtNoinduk.getText().toString());
             intent.putExtra("noktp", txtNoktp.getText().toString());
             intent.putExtra("nama", txtNama.getText().toString());
@@ -131,6 +151,7 @@ public class DetailDataActivity extends AppCompatActivity {
         btnEditCatatan.setOnClickListener(v -> {
             Intent intent = new Intent(DetailDataActivity.this, EditCatatanActivity.class);
             intent.putExtra("key", key);
+            intent.putExtra("urlprofile", txtUrlProfile.getText().toString());
             intent.putExtra("noinduk", txtNoinduk.getText().toString());
             intent.putExtra("noktp", txtNoktp.getText().toString());
             intent.putExtra("nama", txtNama.getText().toString());

@@ -1,12 +1,25 @@
 package com.example.aplikasipm;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.PackageManagerCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.aplikasipm.Model.DataFirebaseHelper;
@@ -16,6 +29,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +38,11 @@ import java.util.Map;
 public class TambahDataActivity extends AppCompatActivity {
     EditText etNoinduk, etNoktp, etNama, etTgllahir, etJkelamin, etStatus, etPendidikan, etAgama, etAlamat, etAsrama, etNohub, etPjawab, etTglmasuk, etCatatanPM;
     Button btnSave, btnBack;
+    Button btnPilihProfile, btnLihatProfile;
+    TextView txtUrlProfile;
+    ImageView imgProfile;
+
+    String sImgProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +63,28 @@ public class TambahDataActivity extends AppCompatActivity {
         etTglmasuk = findViewById(R.id.etTglMasuk);
         etCatatanPM = findViewById(R.id.etCatatanPM);
 
+        txtUrlProfile = findViewById(R.id.txtUrlProfile);
+        imgProfile = findViewById(R.id.imgProfile);
+
+        btnPilihProfile = findViewById(R.id.btn_pilih_profile);
+        btnPilihProfile.setOnClickListener(v -> {
+            if (ContextCompat.checkSelfPermission(TambahDataActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(TambahDataActivity.this, new String[]{
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                }, 1);
+            }else {
+                selectImage();
+            }
+        });
+
+        btnLihatProfile = findViewById(R.id.btn_lihat_profile);
+        btnLihatProfile.setOnClickListener(v -> {
+            byte[] bytes = Base64.decode(sImgProfile, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            imgProfile.setImageBitmap(bitmap);
+        });
+
         btnBack = findViewById(R.id.btn_back);
         btnBack.setOnClickListener(v -> {
             finish();
@@ -52,6 +94,7 @@ public class TambahDataActivity extends AppCompatActivity {
         btnSave = findViewById(R.id.btn_save);
         btnSave.setOnClickListener(v -> {
             DataListModel listData = new DataListModel();
+            listData.setUrlprofile(txtUrlProfile.getText().toString());
             listData.setNoinduk(etNoinduk.getText().toString());
             listData.setNoktp(etNoktp.getText().toString());
             listData.setNama(etNama.getText().toString());
@@ -88,5 +131,42 @@ public class TambahDataActivity extends AppCompatActivity {
                 }
             });
         });
+    }
+
+    private void selectImage() {
+        txtUrlProfile.setText("");
+        imgProfile.setImageBitmap(null);
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(Intent.createChooser(intent,"Pilih Foto"), 1);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode==1 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+            selectImage();
+        }else {
+            Toast.makeText(getApplicationContext(), "Permission Denied.",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==1 && resultCode==RESULT_OK && data!=null){
+            Uri uri = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100,stream);
+                byte[] bytes = stream.toByteArray();
+                sImgProfile = Base64.encodeToString(bytes, Base64.DEFAULT);
+                txtUrlProfile.setText(sImgProfile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

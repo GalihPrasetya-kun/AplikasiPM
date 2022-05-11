@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.aplikasipm.Model.DataFirebaseHelper;
@@ -16,15 +17,17 @@ import java.util.List;
 
 public class EditCatatanActivity extends AppCompatActivity {
     EditText etNoinduk, etNoktp, etNama, etTgllahir, etJkelamin, etStatus, etPendidikan, etAgama, etAlamat, etAsrama, etNohub, etPjawab, etTglmasuk, etCatatanPM;
+    TextView txtUrlProfile;
     Button btnSave, btnBack;
 
-    String key, noinduk, noktp, nama, tgllahir, jkelamin, status, pendidikan, agama, alamat, asrama, nohub, pjawab, tglmasuk, catatanpm;
+    String key, noinduk, noktp, nama, tgllahir, jkelamin, status, pendidikan, agama, alamat, asrama, nohub, pjawab, tglmasuk, catatanpm, urlprofile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_catatan);
         key = getIntent().getStringExtra("key");
+        urlprofile = getIntent().getStringExtra("urlprofile");
         noinduk = getIntent().getStringExtra("noinduk");
         noktp = getIntent().getStringExtra("noktp");
         nama = getIntent().getStringExtra("nama");
@@ -39,6 +42,9 @@ public class EditCatatanActivity extends AppCompatActivity {
         pjawab = getIntent().getStringExtra("pjawab");
         tglmasuk = getIntent().getStringExtra("tglmasuk");
         catatanpm = getIntent().getStringExtra("catatanpm");
+
+        txtUrlProfile = findViewById(R.id.txtUrlProfile);
+        txtUrlProfile.setText(urlprofile);
 
         etNoinduk = findViewById(R.id.etNoinduk);
         etNoinduk.setText(noinduk);
@@ -79,6 +85,7 @@ public class EditCatatanActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 DataListModel listData = new DataListModel();
+                listData.setUrlprofile(txtUrlProfile.getText().toString());
                 listData.setNoinduk(etNoinduk.getText().toString());
                 listData.setNoktp(etNoktp.getText().toString());
                 listData.setNama(etNama.getText().toString());

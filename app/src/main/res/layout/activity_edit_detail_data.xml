@@ -12,6 +12,40 @@
         android:orientation="vertical"
         android:layout_margin="10dp">
 
+        <ImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:src="@drawable/add_image"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btn_pilih_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="3dp"
+                android:text="Pilih Foto"/>
+
+            <Button
+                android:id="@+id/btn_lihat_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:text="Lihat Foto"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtUrlProfile"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

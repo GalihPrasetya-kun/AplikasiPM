@@ -28,11 +28,12 @@ public class DataRecyclerAdapter {
     }
 
     class DataListView extends RecyclerView.ViewHolder{
-        TextView txtNoinduk, txtNoktp, txtNama, txtTgllahir, txtJkelamin, txtStatus, txtPendidikan, txtAgama, txtAlamat, txtAsrama, txtNohub, txtPjawab, txtTglmasuk, txtCatatanPM;
+        TextView txtNoinduk, txtNoktp, txtNama, txtTgllahir, txtJkelamin, txtStatus, txtPendidikan, txtAgama, txtAlamat, txtAsrama, txtNohub, txtPjawab, txtTglmasuk, txtCatatanPM, txtUrlProfile;
         String key;
 
         public DataListView(ViewGroup parent){
             super(LayoutInflater.from(mContext).inflate(R.layout.item_data, parent, false));
+            txtUrlProfile = (TextView) itemView.findViewById(R.id.txtUrlProfile);
             txtNoinduk = (TextView) itemView.findViewById(R.id.txtNoinduk);
             txtNama = (TextView) itemView.findViewById(R.id.txtNama);
             txtNoktp = (TextView) itemView.findViewById(R.id.txtNoktp);
@@ -53,6 +54,7 @@ public class DataRecyclerAdapter {
                 public void onClick(View view) {
                     Intent intent = new Intent(mContext, DetailDataActivity.class);
                     intent.putExtra("key", key);
+                    intent.putExtra("urlprofile", txtUrlProfile.getText().toString());
                     intent.putExtra("noinduk", txtNoinduk.getText().toString());
                     intent.putExtra("noktp", txtNoktp.getText().toString());
                     intent.putExtra("nama", txtNama.getText().toString());
@@ -74,6 +76,7 @@ public class DataRecyclerAdapter {
         }
 
         public void bind(DataListModel listData, String key){
+            txtUrlProfile.setText(listData.getUrlprofile());
             txtNoinduk.setText(listData.getNoinduk());
             txtNama.setText(listData.getNama());
             txtNoktp.setText(listData.getNoktp());
